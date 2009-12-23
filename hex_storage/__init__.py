@@ -1,18 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from django.core.files.storage import FileSystemStorage
+from pinyin.urlify import urlify
 
 import random
+import os
 
 class HexFileSystemStorage(FileSystemStorage):
-    def get_available_name(self, name):
-        base_name = name
-        try:
-            dot_index = base_name.rindex('.')
-            if base_name[dot_index:].find('/') != -1 or base_name[dot_index:].find('\\') != -1:
-                raise ValueError
-        except ValueError: # filename has no dot
-            dot_index = len(base_name)
-        while self.exists(name):
-            name = base_name[:dot_index] + ('_%08X' % random.randint(0, 0x100000000)) + base_name[dot_index:]
-        return name
+    def get_available_name(self, full_name):
+        path, tail = os.path.split(full_name)
+        name, ext = os.path.splitext(tail)
+        name = urlify(name)
+        if ext:
+            if ext.startswith('.'):
+                ext = '.' + urlify(ext[1:])
+            else:
+                ext = urlify(ext)
+        source_name = name
+
+        while True:
+            result = os.path.join(path, name + ext)
+            if not self.exists(result):
+                break
+            name = source_name + ('_%08X' % random.randint(0, 0x100000000))
+        return result
