@@ -22,5 +22,5 @@ class HexFileSystemStorage(FileSystemStorage):
             result = os.path.join(path, name + ext)
             if not self.exists(result):
                 break
-            name = source_name + ('-%08X' % random.randint(0, 0x100000000))
+            name = source_name + ('-%08x' % random.randint(0, 0x100000000))
         return result
