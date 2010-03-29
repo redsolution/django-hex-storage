@@ -9,13 +9,7 @@ parts = ...
 
 [django]
 extra-paths = ...
-              ${svncode:location}/pinyin-urlify
               ${django-hex-storage:location}
-
-[svncode]
-recipe = iw.recipe.subversion
-urls = ...
-       http://pinyin-urlify.googlecode.com/svn/trunk@7 pinyin-urlify/pinyin
 
 [django-hex-storage]
 recipe = zerokspot.recipe.git
