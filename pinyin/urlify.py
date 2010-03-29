@@ -48,7 +48,7 @@ def urlify(urlstring, default='default', max_length=50,
     re_alnum = re.compile(r'[\w\s\-]+')
     re_stop = re.compile('|'.join([r'\b%s\b' % word for word in stop_words]))
     re_reserved = re.compile('|'.join([r'\b%s\b' % word for word in reserved_words]))
-    re_space = re.compile(r'[\s_\-]+')
+    re_space = re.compile(r'[\s_]+')
 
     for char in urlstring:
         if len(slug) >= max_length:

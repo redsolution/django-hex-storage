@@ -8,11 +8,11 @@ class PinYinTestCase(unittest.TestCase):
         self.assertEqual(urlify(u'公共的模'),
                          u'gong-gong-de-mo')
 
-    def testEnglish(self): 
+    def testEnglish(self):
         self.assertEqual(urlify(u'WOW! We Say ENGLISH!!!'),
                          u'wow-we-say-english')
 
-    def testWestern(self): 
+    def testWestern(self):
         self.assertEqual(urlify(u'ÀÞβ Λğ-Ґє'),
                          u'athb-lg-gye')
 
@@ -43,6 +43,10 @@ class PinYinTestCase(unittest.TestCase):
     def testMaxLengthLimit(self):
         self.assertEqual(urlify(u'urlstring url instance class request embodies. Example, data headers, calling:'),
                          u'urlstring-url-instance-class-request-embodies-exam')
+
+    def testHyphen(self):
+        self.assertEqual(urlify(u' x--x- -x-  -x- - -x- '),
+                         u'x--x---x---x-----x-')
 
 
 if __name__ == '__main__':
