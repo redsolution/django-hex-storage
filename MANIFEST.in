@@ -1,0 +1,2 @@
+recursive-include hex_storage *.py
+recursive-include pinyin *.py
