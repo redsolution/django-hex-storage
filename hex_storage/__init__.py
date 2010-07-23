@@ -6,6 +6,9 @@ from pinyin.urlify import urlify
 import random
 import os
 
+class FileWasFound(BaseException):
+    pass
+
 class HexFileSystemStorage(FileSystemStorage):
     def get_available_name(self, full_name):
         path, tail = os.path.split(full_name)
@@ -19,8 +22,15 @@ class HexFileSystemStorage(FileSystemStorage):
         source_name = name
 
         while True:
-            result = os.path.join(path, name + ext)
-            if not self.exists(result):
+            try:
+                directories, files = self.listdir(path)
+                for directory in directories:
+                    if directory == name + ext:
+                        raise FileWasFound()
+                for file in files:
+                    if os.path.splitext(file)[0] == name:
+                        raise FileWasFound()
                 break
-            name = source_name + ('-%08x' % random.randint(0, 0x100000000))
-        return result
+            except FileWasFound:
+                name = source_name + ('-%08x' % random.randint(0, 0x100000000))
+        return os.path.join(path, name + ext)
