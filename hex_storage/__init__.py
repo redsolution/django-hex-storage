@@ -23,6 +23,8 @@ class HexFileSystemStorage(FileSystemStorage):
 
         while True:
             try:
+                if not os.path.exists(path):
+                    break
                 directories, files = self.listdir(path)
                 for directory in directories:
                     if directory == name + ext:
