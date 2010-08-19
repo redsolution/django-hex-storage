@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.core.files.storage import FileSystemStorage
-from pinyin.urlify import urlify
-
-import random
 import os
+import random
+
+from django.core.files.storage import FileSystemStorage
+from django.utils.encoding import smart_unicode
+from pinyin.urlify import urlify
 
 class FileWasFound(BaseException):
     pass
@@ -30,7 +31,7 @@ class HexFileSystemStorage(FileSystemStorage):
                     if directory == name + ext:
                         raise FileWasFound()
                 for file in files:
-                    if unicode(os.path.splitext(file)[0]) == name:
+                    if smart_unicode(os.path.splitext(file)[0]) == name:
                         raise FileWasFound()
                 break
             except FileWasFound:
