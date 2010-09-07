@@ -10,12 +10,12 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name="grandma.django-hex-storage",
+    name="redsolutioncms.django-hex-storage",
     version="0.1.0",
     description=("Django hex file system storage" +
-        " with GrandmaCMS integration"),
+        " with RedsolutionCMS integration"),
     license="LGPL",
-    keywords="django hex file system storage",
+    keywords="django file system storage",
 
     author="Alexander Ivanov",
     author_email="alexander.ivanov@redsolution.ru",
@@ -26,14 +26,15 @@ setup(
     url="http://packages.python.org/django-hex-storage",
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Framework :: Buildout',
         'Intended Audience :: Developers',
         'License :: Freely Distributable',
+        'Framework :: Django',
+        'Environment :: Web Environment',
         'Natural Language :: Russian',
-        'Operating System :: Microsoft :: Windows',
-        'Operating System :: Unix',
-        'Programming Language :: Python :: 2.5',
-        'Topic :: Software Development :: Version Control',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Internet :: WWW/HTTP :: Site Management',
     ],
     packages=find_packages(),
     install_requires=[],
@@ -41,6 +42,6 @@ setup(
     zip_safe=False,
     long_description=open('README').read(),
     entry_points={
-        'grandma_setup': ['easy_news = hex_storage.grandma_setup', ],
+        'redsolutioncms': ['hex_storage = hex_storage.redsolution_setup', ],
     }
 )
