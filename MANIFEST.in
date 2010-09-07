@@ -1,2 +1,3 @@
-recursive-include hex_storage *.py
-recursive-include pinyin *.py
+recursive-include hex_storage *
+recursive-include pinyin *
+exclude *.orig *.pyc
