@@ -36,7 +36,7 @@ setup(
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP :: Site Management',
     ],
-    packages=find_packages(),
+    packages=find_packages(exclude=['example', 'example.*']),
     install_requires=[],
     include_package_data=True,
     zip_safe=False,
