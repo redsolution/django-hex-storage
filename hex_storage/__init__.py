@@ -7,6 +7,8 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.encoding import smart_unicode
 from pinyin.urlify import urlify
 
+__version__ = '0.1.0'
+
 class FileWasFound(BaseException):
     pass
 

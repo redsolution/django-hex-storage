@@ -1,0 +1,3 @@
+Django hex storage is add-on on the top of Django file system.
+It has improvements that cover: international filenames (processed with pinyin module)
+and the same file names (django adds underscore to same filename, we add HEX hash) - hence the name :)
