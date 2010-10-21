@@ -36,4 +36,4 @@ Classifiers:
 
 `Utilities`_
 
-.. _`Frontpage handlers`: http://djangoworkshop.com/classifiers/utilities
+.. _`Utilities`: http://www.redsolutioncms.org/classifiers/utilities
