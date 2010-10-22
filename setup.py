@@ -14,7 +14,7 @@ def read(fname):
 
 setup(
     name="redsolutioncms.django-hex-storage",
-    version=__import__('hex_storage').__version__,
+    version='0.1.0',
     description=read('DESCRIPTION'),
     license="LGPL",
     keywords="django file system storage",
