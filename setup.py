@@ -16,7 +16,7 @@ setup(
     name="redsolutioncms.django-hex-storage",
     version='0.1.0',
     description=read('DESCRIPTION'),
-    license="LGPL",
+    license="GPLv3",
     keywords="django file system storage",
 
     author="Alexander Ivanov",
