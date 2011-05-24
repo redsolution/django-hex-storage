@@ -32,5 +32,5 @@ class HexFileSystemStorage(FileSystemStorage):
                         raise FileWasFound()
                 break
             except FileWasFound:
-                name = source_name + ('-%08x' % random.randint(0, 0x100000000))
+                name = source_name + ('-%04x' % random.randint(0, 0x10000))
         return os.path.join(path, name + ext)
