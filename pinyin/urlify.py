@@ -21,7 +21,7 @@ reserved_words = [u'blog', u'edit', u'delete', u'new', u'popular', u'wiki']
 
 
 def urlify(urlstring, default='default', max_length=50,
-           stop_words=stop_words, reserved_words=reserved_words):
+           stop_words=stop_words, reserved_words=reserved_words, remove_dots=True):
     """
     Urlify is a simple function that generates the slug of a urlstring
     automatically using python.
@@ -45,7 +45,10 @@ def urlify(urlstring, default='default', max_length=50,
 
     slug = ''
 
-    re_alnum = re.compile(r'[\w\s\-]+')
+    if remove_dots:
+        re_alnum = re.compile(r'[\w\s\-]+')
+    else:
+        re_alnum = re.compile(r'[\w\s\-\.]+')
     re_stop = re.compile('|'.join([r'\b%s\b' % word for word in stop_words]))
     re_reserved = re.compile('|'.join([r'\b%s\b' % word for word in reserved_words]))
     re_space = re.compile(r'[\s_]+')
