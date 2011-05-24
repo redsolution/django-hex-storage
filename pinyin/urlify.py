@@ -54,7 +54,7 @@ def urlify(urlstring, default='default', max_length=50,
     re_space = re.compile(r'[\s_]+')
 
     for char in urlstring:
-        if len(slug) >= max_length:
+        if max_length is not None and len(slug) >= max_length:
             break
         if re_alnum.match(char):
             slug += char
