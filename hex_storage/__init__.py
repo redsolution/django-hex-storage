@@ -7,9 +7,6 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.encoding import smart_unicode
 from pinyin.urlify import urlify
 
-class FileWasFound(BaseException):
-    pass
-
 class HexFileSystemStorage(FileSystemStorage):
     def get_obfuscated_name(self, name):
         return '%s-%04x' % (name, random.randint(0, 0x10000))
@@ -26,17 +23,13 @@ class HexFileSystemStorage(FileSystemStorage):
         name = self.get_first_name(source_name)
 
         while True:
-            try:
-                if not self.exists(path):
-                    break
-                directories, files = self.listdir(path)
-                for directory in directories:
-                    if directory == name + ext:
-                        raise FileWasFound()
-                for file in files:
-                    if smart_unicode(os.path.splitext(file)[0]) == name:
-                        raise FileWasFound()
+            if not self.exists(path):
                 break
-            except FileWasFound:
-                name = self.get_obfuscated_name(source_name)
+            directories, files = self.listdir(path)
+            for value in directories + files:
+                if smart_unicode(os.path.splitext(value)[0]) == name:
+                    break
+            else:
+                break
+            name = self.get_obfuscated_name(source_name)
         return os.path.join(path, name + ext)
