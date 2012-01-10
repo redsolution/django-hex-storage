@@ -14,9 +14,9 @@ class HexFileSystemStorage(FileSystemStorage):
     def get_available_name(self, full_name):
         path, tail = os.path.split(full_name)
         name, ext = os.path.splitext(tail)
-        name = urlify(name, max_length=None, remove_dots=False)
+        name = urlify(name, max_length=None, remove_dots=False, default='noname')
         if ext:
-            ext = urlify(ext, max_length=None, remove_dots=False)
+            ext = urlify(ext, max_length=None, remove_dots=False, default='')
         source_name = name
 
         while True:

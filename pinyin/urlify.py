@@ -70,7 +70,7 @@ def urlify(urlstring, default='default', max_length=50,
 
     slug = re_stop.sub(u'', slug.lower())
     slug = re_space.sub(u'-', slug.strip())
-    if slug is '' or re_reserved.match(slug):
+    if slug == '' or re_reserved.match(slug):
         slug = default
 
     return slug
