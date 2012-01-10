@@ -11,13 +11,19 @@ class FileWasFound(BaseException):
     pass
 
 class HexFileSystemStorage(FileSystemStorage):
+    def get_obfuscated_name(self, name):
+        return '%s-%04x' % (name, random.randint(0, 0x10000))
+
+    def get_first_name(self, name):
+        return name
+
     def get_available_name(self, full_name):
         path, tail = os.path.split(full_name)
-        name, ext = os.path.splitext(tail)
-        name = urlify(name, max_length=None, remove_dots=False, default='noname')
+        source_name, ext = os.path.splitext(tail)
+        source_name = urlify(source_name, max_length=None, remove_dots=False, default='noname')
         if ext:
             ext = urlify(ext, max_length=None, remove_dots=False, default='')
-        source_name = name
+        name = self.get_first_name(source_name)
 
         while True:
             try:
@@ -32,5 +38,5 @@ class HexFileSystemStorage(FileSystemStorage):
                         raise FileWasFound()
                 break
             except FileWasFound:
-                name = source_name + ('-%04x' % random.randint(0, 0x10000))
+                name = self.get_obfuscated_name(source_name)
         return os.path.join(path, name + ext)
